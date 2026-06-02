@@ -50,4 +50,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Tenant::class);
     }
+
+    /** WhatsApp notifications are routed to the user's phone number (§6.7). */
+    public function routeNotificationForWhatsapp(): ?string
+    {
+        return $this->phone;
+    }
 }

@@ -28,6 +28,8 @@ class RolesAndPermissionsSeeder extends Seeder
             'visa.view', 'visa.manage',
             'invoice.view', 'invoice.manage',
             'payment.manage',
+            'import.manage',
+            'dispute.raise',
             'report.view',
             'audit.view',
             'tenant.manage',
@@ -53,6 +55,7 @@ class RolesAndPermissionsSeeder extends Seeder
                 'contract.view', 'contract.manage',
                 'visa.view', 'visa.manage',
                 'invoice.view', 'invoice.manage', 'payment.manage',
+                'import.manage', 'dispute.raise',
                 'report.view', 'audit.view',
             ],
             'agency-manager' => [
@@ -61,13 +64,13 @@ class RolesAndPermissionsSeeder extends Seeder
                 'worker.view', 'worker.manage',
                 'contract.view', 'contract.manage',
                 'visa.view', 'visa.manage',
-                'invoice.view', 'report.view',
+                'invoice.view', 'dispute.raise', 'report.view',
             ],
             'agency-staff' => [
                 'eligibility.check', 'identity.read',
                 'sponsor.view', 'sponsor.manage', 'sponsor.block',
                 'worker.view', 'worker.manage',
-                'visa.view', 'visa.manage',
+                'visa.view', 'visa.manage', 'dispute.raise',
             ],
             'agency-accountant' => ['invoice.view', 'invoice.manage', 'payment.manage', 'report.view'],
             'auditor' => [

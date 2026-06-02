@@ -29,9 +29,19 @@ apps build on.
 | Sponsor & Worker modules (CRUD, dedupe, PII encryption) | ✅ Implemented |
 | Immutable audit log of sensitive actions | ✅ Implemented |
 | Bilingual AR/RTL + EN, Kuwait timezone/currency defaults | ✅ Implemented |
-| PACI / Hawyti / smart-card drivers | 🟡 Integration seams (await gov. approval, §13) |
-| Notifications (FCM/APNs/email/SMS/WhatsApp) | 🟡 Triggers + scheduler wired; delivery TODO |
-| Contracts, Visa pipeline, Payments, Migration tool, Reporting | ⬜ Phase 2–3 (modelled, not built) |
+| Contracts + PAM warranty + Tanazul transfer (warranty void) | ✅ Implemented (Phase 2) |
+| Visa 20 deployment pipeline (stages, SLA, doc-gated advance) | ✅ Implemented (Phase 2) |
+| Invoicing + payments (gateway abstraction, manual functional) | ✅ Implemented (Phase 2) |
+| Agency + vendor dashboards | ✅ Implemented (Phase 2) |
+| Legacy migration tool (CSV, mapping, dry-run, dedupe, rollback) | ✅ Implemented (Phase 3) |
+| Block dispute / governance workflow | ✅ Implemented (Phase 3) |
+| Public consented worker catalogue | ✅ Implemented (Phase 3) |
+| Notifications + in-app inbox + renewal reminders | ✅ Implemented (Phase 3) |
+| Reporting + CSV export (Arabic-safe BOM) | ✅ Implemented (Phase 3) |
+| PACI / Hawyti / smart-card identity drivers | 🟡 Integration seams (await gov. approval, §13) |
+| KNET / MyFatoorah / SADAD payment gateways | 🟡 Integration seams (await merchant onboarding) |
+| WhatsApp / FCM / APNs / SMS delivery | 🟡 WhatsApp channel wired (logs until token set); push/SMS TODO |
+| XLSX / PDF report rendering (Arabic) | 🟡 Seam (CSV functional; phpspreadsheet/mpdf TODO) |
 | Web admin SPA, Flutter apps | ⬜ Separate workstreams |
 
 ---

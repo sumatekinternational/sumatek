@@ -21,6 +21,7 @@ class Worker extends Model
 
     protected $fillable = [
         'tenant_id',
+        'data_import_id',
         'passport_no',
         'passport_no_hash',
         'passport_expiry',
@@ -35,6 +36,9 @@ class Worker extends Model
         'experience_years',
         'medical_status',
         'status',
+        'public_listed',
+        'public_token',
+        'consent_public_at',
         'source_agency',
         'verification_level',
         'identity_source',
@@ -51,8 +55,16 @@ class Worker extends Model
             'skills' => 'array',
             'languages' => 'array',
             'experience_years' => 'integer',
+            'public_listed' => 'boolean',
+            'consent_public_at' => 'datetime',
         ];
     }
+
+    /** Non-PII fields safe to expose in the public catalogue (§6.2). */
+    public const PUBLIC_FIELDS = [
+        'public_token', 'name_en', 'nationality', 'sex', 'skills',
+        'languages', 'experience_years', 'photo_path', 'status',
+    ];
 
     protected static function booted(): void
     {

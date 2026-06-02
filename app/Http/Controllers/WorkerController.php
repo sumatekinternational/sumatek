@@ -4,10 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\Worker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class WorkerController extends Controller
 {
+    /** Consent + list a worker in the public catalogue (§6.2). */
+    public function publish(Request $request, Worker $worker)
+    {
+        $this->authorizeAbility('worker.manage');
+
+        $request->validate(['consent' => ['accepted']]);
+
+        $worker->update([
+            'public_listed' => true,
+            'public_token' => $worker->public_token ?? (string) Str::uuid(),
+            'consent_public_at' => now(),
+        ]);
+
+        return response()->json($worker);
+    }
+
+    public function unpublish(Worker $worker)
+    {
+        $this->authorizeAbility('worker.manage');
+
+        $worker->update(['public_listed' => false, 'consent_public_at' => null]);
+
+        return response()->json($worker);
+    }
+
     public function index(Request $request)
     {
         $this->authorizeAbility('worker.view');

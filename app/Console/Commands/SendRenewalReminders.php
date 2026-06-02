@@ -3,12 +3,13 @@
 namespace App\Console\Commands;
 
 use App\Models\Subscription;
+use App\Notifications\SubscriptionRenewalReminder;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Notification;
 
 /**
- * Fires renewal reminders at 60/30/7/1 days before expiry (§2). Notification
- * delivery (email/SMS/push) is handled by the notifications subsystem (§6.7);
- * this command identifies the due reminders.
+ * Fires renewal reminders at 60/30/7/1 days before expiry (§2/§6.7), delivered
+ * in-app + email + WhatsApp to each agency's admin/owner users.
  */
 class SendRenewalReminders extends Command
 {
@@ -26,18 +27,20 @@ class SendRenewalReminders extends Command
 
             Subscription::where('status', 'active')
                 ->whereDate('ends_at', $target)
-                ->with('tenant')
+                ->with('tenant.users')
                 ->chunkById(200, function ($subscriptions) use (&$sent, $days) {
                     foreach ($subscriptions as $subscription) {
-                        // TODO(§6.7): dispatch RenewalReminderNotification on
-                        // mail/SMS/push channels. Logged here for traceability.
-                        $this->line("Reminder ({$days}d) -> tenant #{$subscription->tenant_id}");
-                        $sent++;
+                        $recipients = $subscription->tenant?->users ?? collect();
+
+                        if ($recipients->isNotEmpty()) {
+                            Notification::send($recipients, new SubscriptionRenewalReminder($subscription, $days));
+                            $sent += $recipients->count();
+                        }
                     }
                 });
         }
 
-        $this->info("Queued {$sent} renewal reminder(s).");
+        $this->info("Dispatched {$sent} renewal reminder(s).");
 
         return self::SUCCESS;
     }

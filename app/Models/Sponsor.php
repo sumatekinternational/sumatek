@@ -21,6 +21,7 @@ class Sponsor extends Model
 
     protected $fillable = [
         'tenant_id',
+        'data_import_id',
         'civil_id',
         'civil_id_hash',
         'name_ar',
