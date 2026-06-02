@@ -1,0 +1,38 @@
+{
+  "app": { "title": "Manpower SaaS", "subtitle": "Kuwait Domestic Labour Platform" },
+  "nav": {
+    "dashboard": "Dashboard",
+    "eligibility": "Eligibility Check",
+    "sponsors": "Sponsors",
+    "workers": "Workers",
+    "logout": "Sign out"
+  },
+  "login": {
+    "title": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "error": "Invalid credentials"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "workers": "Workers",
+    "active_contracts": "Active contracts",
+    "open_visa": "Open visa cases",
+    "sla_breached": "SLA breached",
+    "outstanding": "Outstanding (KWD)",
+    "blocked_by_us": "Sponsors we blocked"
+  },
+  "eligibility": {
+    "title": "Sponsor Eligibility / Block Check",
+    "civil_id": "Civil ID",
+    "check": "Check",
+    "placeholder": "Enter or scan the sponsor's Civil ID",
+    "status": { "clear": "CLEAR", "caution": "CAUTION", "blocked": "BLOCKED" },
+    "blocked_by": "Blocked by {n} agency(ies)",
+    "disclaimer": "Disclaimer"
+  },
+  "sponsors": { "title": "Sponsors", "name": "Name", "nationality": "Nationality", "phone": "Phone", "empty": "No sponsors found" },
+  "workers": { "title": "Workers", "name": "Name", "nationality": "Nationality", "status": "Status", "empty": "No workers found" },
+  "common": { "loading": "Loading…", "search": "Search", "language": "العربية" }
+}

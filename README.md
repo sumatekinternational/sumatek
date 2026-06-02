@@ -42,7 +42,8 @@ apps build on.
 | KNET / MyFatoorah / SADAD payment gateways | 🟡 Integration seams (await merchant onboarding) |
 | WhatsApp / FCM / APNs / SMS delivery | 🟡 WhatsApp channel wired (logs until token set); push/SMS TODO |
 | XLSX / PDF report rendering (Arabic) | 🟡 Seam (CSV functional; phpspreadsheet/mpdf TODO) |
-| Web admin SPA, Flutter apps | ⬜ Separate workstreams |
+| Web admin SPA (Vue 3 + Tailwind, bilingual RTL/LTR) | 🟢 Foundation in `web/` (auth, dashboard, eligibility, sponsors, workers) |
+| Flutter mobile apps | ⬜ Separate workstream |
 
 ---
 

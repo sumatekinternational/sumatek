@@ -1,0 +1,38 @@
+{
+  "app": { "title": "منصة الاستقدام", "subtitle": "منصة العمالة المنزلية في الكويت" },
+  "nav": {
+    "dashboard": "لوحة التحكم",
+    "eligibility": "فحص أهلية الكفيل",
+    "sponsors": "الكفلاء",
+    "workers": "العمالة",
+    "logout": "تسجيل الخروج"
+  },
+  "login": {
+    "title": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "submit": "دخول",
+    "error": "بيانات الدخول غير صحيحة"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "workers": "العمالة",
+    "active_contracts": "العقود النشطة",
+    "open_visa": "معاملات التأشيرات المفتوحة",
+    "sla_breached": "تجاوز المهلة",
+    "outstanding": "مستحقات (د.ك)",
+    "blocked_by_us": "كفلاء قمنا بحظرهم"
+  },
+  "eligibility": {
+    "title": "فحص أهلية / حظر الكفيل",
+    "civil_id": "الرقم المدني",
+    "check": "فحص",
+    "placeholder": "أدخل أو امسح الرقم المدني للكفيل",
+    "status": { "clear": "لا يوجد حظر", "caution": "تنبيه", "blocked": "محظور" },
+    "blocked_by": "محظور من قِبل {n} مكتب",
+    "disclaimer": "إخلاء مسؤولية"
+  },
+  "sponsors": { "title": "الكفلاء", "name": "الاسم", "nationality": "الجنسية", "phone": "الهاتف", "empty": "لا يوجد كفلاء" },
+  "workers": { "title": "العمالة", "name": "الاسم", "nationality": "الجنسية", "status": "الحالة", "empty": "لا توجد عمالة" },
+  "common": { "loading": "جارٍ التحميل…", "search": "بحث", "language": "English" }
+}
