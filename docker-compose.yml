@@ -1,0 +1,58 @@
+# Local development stack (§8). Deploy to a Kuwait-region cloud for prod.
+services:
+  app:
+    build: .
+    volumes:
+      - .:/var/www/html
+    depends_on: [db, redis]
+    environment:
+      DB_HOST: db
+      REDIS_HOST: redis
+
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html:ro
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on: [app]
+
+  queue:
+    build: .
+    command: php artisan queue:work --tries=3
+    volumes:
+      - .:/var/www/html
+    depends_on: [db, redis]
+    environment:
+      DB_HOST: db
+      REDIS_HOST: redis
+
+  scheduler:
+    build: .
+    command: sh -c "while true; do php artisan schedule:run; sleep 60; done"
+    volumes:
+      - .:/var/www/html
+    depends_on: [db, redis]
+    environment:
+      DB_HOST: db
+      REDIS_HOST: redis
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: manpower_saas
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  dbdata:
