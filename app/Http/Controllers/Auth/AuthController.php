@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\PermissionRegistrar;
 
 class AuthController extends Controller
 {
@@ -30,15 +31,7 @@ class AuthController extends Controller
 
         return response()->json([
             'token' => $token,
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'locale' => $user->locale,
-                'tenant_id' => $user->tenant_id,
-                'roles' => $user->getRoleNames(),
-                'permissions' => $user->getAllPermissions()->pluck('name'),
-            ],
+            'user' => $this->profile($user),
         ]);
     }
 
@@ -51,9 +44,21 @@ class AuthController extends Controller
 
     public function me(Request $request)
     {
-        $user = $request->user();
+        return response()->json($this->profile($request->user()));
+    }
 
-        return response()->json([
+    /**
+     * Build the user profile payload. Roles/permissions are tenant-scoped, so
+     * we set the Spatie team context to the user's agency first — otherwise the
+     * auth endpoints (which run outside the tenant middleware) would report an
+     * empty set and the SPA would hide every permission-gated screen.
+     */
+    protected function profile(User $user): array
+    {
+        app(PermissionRegistrar::class)->setPermissionsTeamId($user->tenant_id);
+        $user->unsetRelation('roles')->unsetRelation('permissions');
+
+        return [
             'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email,
@@ -61,6 +66,6 @@ class AuthController extends Controller
             'tenant_id' => $user->tenant_id,
             'roles' => $user->getRoleNames(),
             'permissions' => $user->getAllPermissions()->pluck('name'),
-        ]);
+        ];
     }
 }
