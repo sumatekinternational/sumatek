@@ -3,4 +3,4 @@ dist
 *.local
 .vite
 shots/
-shot.mjs
+shot*.mjs
