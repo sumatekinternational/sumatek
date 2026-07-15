@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\EnsureSubscriptionActive;
 use App\Http\Middleware\ResolveTenant;
+use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -20,6 +21,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // Sanctum stateful API for first-party SPA / mobile sessions.
         $middleware->statefulApi();
+
+        // Localise API responses from the Accept-Language header (§7).
+        $middleware->api(prepend: [SetLocale::class]);
 
         // Custom aliases used by route groups.
         $middleware->alias([
