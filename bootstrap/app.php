@@ -19,8 +19,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // Sanctum stateful API for first-party SPA / mobile sessions.
-        $middleware->statefulApi();
+        // The SPA and mobile apps authenticate with Sanctum bearer TOKENS, not
+        // cookies — so we intentionally do NOT enable statefulApi() (that would
+        // impose CSRF on token requests coming from a browser origin).
 
         // Localise API responses from the Accept-Language header (§7).
         $middleware->api(prepend: [SetLocale::class]);
